@@ -1,5 +1,6 @@
 const jsonServer = require('json-server');
 
+//Database for the data in the two pages
 const db = {
     garage: [
         {
@@ -32,6 +33,7 @@ const db = {
     ]
 };
 
+//Json server creation
 const server = jsonServer.create();
 const router = jsonServer.router(db);
 const middlewares = jsonServer.defaults();
@@ -53,6 +55,7 @@ server.patch('/engine', (req, res) => {
         return res.status(404).send('Car with such id was not found in the garage.')
     }
 
+  // Race Distance Information
     const distance = 500000;
     if (status === 'drive') {
         const velocity = state.velocity[id];
@@ -92,6 +95,7 @@ server.patch('/engine', (req, res) => {
     }
 });
 
+//Server initialization
 server.use(router);
 server.listen(PORT, () => {
     console.log('Server is running on port', PORT);
